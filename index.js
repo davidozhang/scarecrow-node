@@ -4,14 +4,18 @@ var server = restify.createServer();
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
+function auth(req, res, next) {
+	console.log("Authenticated.");
+};
 
-function respond(req, res, next)  {
-    console.log("respond works")
-    res.send({hello: "itworks"});
-}
+function devices(req, res, next)  {
+    console.log("Get devices.");
+    res.send({device_1: "device 1", device_2: "device_2"});
+};
 
 //------- routes
-server.get('/send', respond);
+server.get('/devices', devices);
+server.post('/auth', auth)
 
 var port = process.env.PORT || 8080;
 server.listen(port, function() {
