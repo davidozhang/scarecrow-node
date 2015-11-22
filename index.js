@@ -38,10 +38,10 @@ function devices(req, res, next)  {
 };
 
 function devicescontroller(req, res, next)  {
-    var deviceNumber = req.params.device;
+    var device = req.params.device;
     var devicestatus = req.params.setStatus;
 
-    if(deviceNumber == "device 1"){
+    if(device == "device_1"){
         if(devicestatus == "on") {
             console.log("turn on RED");
             ledRed.on();
@@ -50,7 +50,7 @@ function devicescontroller(req, res, next)  {
             console.log("turn off RED");
             ledRed.off();
         }
-    }else if (deviceNumber == "device 2"){
+    } else if (device == "device_2"){
         if(devicestatus == "on") {
             console.log("turn on Green");
             ledGreen.on();
@@ -59,7 +59,7 @@ function devicescontroller(req, res, next)  {
             console.log("turn on Green");
             ledGreen.off();
         }
-    }else if( deviceNumber == "device 3" ){
+    } else if(device == "device_3"){
         if(devicestatus == "on"){
             console.log("turn on Blue")
             ledBlue.on();
