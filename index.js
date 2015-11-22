@@ -191,6 +191,11 @@ function reset(req, res, next) {
     res.send('reset');
 }
 
+function authStatus(req, res, next){
+    res.send({authStatus : isUserAuthenticated});
+}
+
+
 //------- routes
 server.get('/test', respond);
 server.get('/devices', devices);
@@ -198,6 +203,7 @@ server.post('/auth', auth);
 server.post('/devices', devicescontroller);
 server.get('/devicestatus', devicestatus);
 server.post('/reset', reset);
+server.get('/auth', authStatus);
 
 
 var port = process.env.PORT || 8080;
