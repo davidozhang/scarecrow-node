@@ -12,7 +12,9 @@ var button = new groveSensor.GroveButton(4);
 var ledRed = new groveSensor.GroveLed(8); //device 1
 var ledGreen = new groveSensor.GroveLed(3); //device 2
 var ledBlue = new groveSensor.GroveLed(2); //device 3
-var myBuzzer = new upmBuzzer.Buzzer(0);
+var myBuzzer = new upmBuzzer.Buzzer(6);
+
+
 
 
 function auth(req, res, next) {
@@ -35,11 +37,11 @@ function devices(req, res, next)  {
             });
 };
 
-function devicesconroller(req, res, next)  {
+function devicescontroller(req, res, next)  {
     var deviceNumber = req.params.device;
     var devicestatus = req.params.setStatus;
 
-    if(deviceNumber == 1){
+    if(deviceNumber == "device 1"){
         if(devicestatus == "on") {
             console.log("turn on RED");
             ledRed.on();
@@ -48,7 +50,7 @@ function devicesconroller(req, res, next)  {
             console.log("turn off RED");
             ledRed.off();
         }
-    }else if (deviceNumber == 2){
+    }else if (deviceNumber == "device 2"){
         if(devicestatus == "on") {
             console.log("turn on Green");
             ledGreen.on();
@@ -57,7 +59,7 @@ function devicesconroller(req, res, next)  {
             console.log("turn on Green");
             ledGreen.off();
         }
-    }else if( deviceNumber == 3 ){
+    }else if( deviceNumber == "device 3" ){
         if(devicestatus == "on"){
             console.log("turn on Blue")
             ledBlue.on();
@@ -102,13 +104,17 @@ function buzzer(){
 
 }
 
+function devicestatus() {
+
+}
+
 
 //------- routes
 server.get('/test', respond);
 server.get('/devices', devices);
 server.post('/auth', auth);
-server.post('/devices', devicesconroller);
-//server.get('/devicestatus', devicestatus);
+server.post('/devices', devicescontroller);
+server.get('/devicestatus', devicestatus);
 
 var port = process.env.PORT || 8080;
 server.listen(port, function() {
